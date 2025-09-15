@@ -96,6 +96,15 @@ export const TestimonialsSection: React.FC = () => {
   }
 
   const currentTestimonial = testimonials[currentIndex];
+
+  // Helper functions para acessar propriedades de forma type-safe
+  const getName = (testimonial: any) => testimonial?.client_name || testimonial?.name || 'Cliente';
+  const getRole = (testimonial: any) => testimonial?.role || '';
+  const getCompany = (testimonial: any) => testimonial?.company || '';
+  const getInitials = (testimonial: any) => {
+    const name = getName(testimonial);
+    return name.split(' ').map((n: string) => n[0]).join('') || 'NA';
+  };
   
   // Se não há depoimentos ou currentTestimonial é undefined, não renderizar
   if (!testimonials.length || !currentTestimonial) {
@@ -178,18 +187,18 @@ export const TestimonialsSection: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-sky flex items-center justify-center">
                     <span className="text-white font-heading font-bold text-xl">
-                      {('name' in currentTestimonial ? currentTestimonial.name : currentTestimonial.client_name)?.split(' ').map((n: string) => n[0]).join('') || 'NA'}
+                      {getInitials(currentTestimonial)}
                     </span>
                   </div>
                   <div className="text-center sm:text-left">
                     <div className="font-heading font-semibold text-lg text-tech-black dark:text-white">
-                      {'name' in currentTestimonial ? currentTestimonial.name : currentTestimonial.client_name}
+                      {getName(currentTestimonial)}
                     </div>
                     <div className="font-body text-drone-gray-500 dark:text-drone-gray-400">
-                      {'role' in currentTestimonial ? currentTestimonial.role : ''}
+                      {getRole(currentTestimonial)}
                     </div>
                     <div className="font-body text-primary font-medium">
-                      {'company' in currentTestimonial ? currentTestimonial.company : ''}
+                      {getCompany(currentTestimonial)}
                     </div>
                   </div>
                 </div>
