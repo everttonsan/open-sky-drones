@@ -197,8 +197,8 @@ export default function ContactsAdmin() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-3 mb-2">
                       <h4 className="font-heading font-semibold text-drone-dark">{contact.name}</h4>
-                      <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(contact.status)}`}>
-                        {getStatusLabel(contact.status)}
+                      <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(contact.status || 'new')}`}>
+                        {getStatusLabel(contact.status || 'new')}
                       </span>
                     </div>
                     
@@ -235,7 +235,7 @@ export default function ContactsAdmin() {
                   </Button>
                   
                   <select
-                    value={contact.status}
+                    value={contact.status || 'new'}
                     onChange={(e) => updateStatus(contact.id, e.target.value)}
                     className="px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-primary/20 focus:border-primary w-full sm:w-auto min-h-[36px]"
                   >
