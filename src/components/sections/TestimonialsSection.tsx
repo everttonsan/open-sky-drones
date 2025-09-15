@@ -178,18 +178,18 @@ export const TestimonialsSection: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-sky flex items-center justify-center">
                     <span className="text-white font-heading font-bold text-xl">
-                      {currentTestimonial.name?.split(' ').map(n => n[0]).join('') || 'NA'}
+                      {('name' in currentTestimonial ? currentTestimonial.name : currentTestimonial.client_name)?.split(' ').map((n: string) => n[0]).join('') || 'NA'}
                     </span>
                   </div>
                   <div className="text-center sm:text-left">
                     <div className="font-heading font-semibold text-lg text-tech-black dark:text-white">
-                      {currentTestimonial.name}
+                      {'name' in currentTestimonial ? currentTestimonial.name : currentTestimonial.client_name}
                     </div>
                     <div className="font-body text-drone-gray-500 dark:text-drone-gray-400">
-                      {currentTestimonial.role}
+                      {'role' in currentTestimonial ? currentTestimonial.role : ''}
                     </div>
                     <div className="font-body text-primary font-medium">
-                      {currentTestimonial.company}
+                      {'company' in currentTestimonial ? currentTestimonial.company : ''}
                     </div>
                   </div>
                 </div>
